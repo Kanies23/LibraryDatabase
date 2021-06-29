@@ -1,5 +1,5 @@
 /*
- deleteReader - sprawdza przed usunięciem czytelnika czy ten nie ma jakiejś 	nieoddanej książki, w takim wypadku aplikacja wywołuje błąd.
+ deleteReader - checks before deleting a reader if the reader does not have any not returned books, in this case the application raises an error.
  */
 CREATE OR REPLACE TRIGGER deleteReader
     BEFORE DELETE OR UPDATE
@@ -29,7 +29,7 @@ end;
 
 
 /*
- addAutor - sprawdza czy dodawany do tabeli autor nie występuje już gdzieś w tej tabeli, a jeśli tak to zwraca jego id i wywołuje błąd
+ addAutor - checks if the author added to the table does not already exist somewhere in this table, and if so, returns his id and raises an error
  */
 CREATE OR REPLACE TRIGGER addAutor
     BEFORE INSERT
@@ -56,8 +56,8 @@ end;
 
 
 /*
- increaseByPercent - procedura z Cursorem która przyjmuje dwa parametry v_percent oraz v_limitValue. Pozwala użytkownikowi podnieść kwoty za spóźnienie o wartość procentową podaną jako liczba (bez 0.4 tylko np 40)
-    której maksymalna wysokość przed podniesieniem wynosi v_limitValue, po czym wypisuje na konsole uzyskane zmiany
+ increaseByPercent - procedure with Cursor that takes two parameters v_percent and v_limitValue. It allows the user to increase the amounts for late payment by the percentage given as a number (as 40 not 0.4 e.g)
+    whose maximum amount before the increase is v_limitValue, then it prints the obtained changes to the console
  */
 CREATE OR REPLACE PROCEDURE increaseByPercent(v_percent integer, v_limitValue integer)
 AS
@@ -84,7 +84,7 @@ end;
 
 
 /*
- zwrotKsiazki - powoduje wstawienie aktualnej daty w kolumnie daty zwrotu, jako parametr przyjmuje idStanu czyli unikalny identyfikator danego egzemplarza książki.
+ zwrotKsiazki - causes the current date to be inserted in the return date column, takes as parameter the idStanu, which is the unique identifier of the given book copy.
  */
 CREATE OR REPLACE PROCEDURE zwrotKsiazki(idStanu integer)
 AS
